@@ -3,7 +3,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import authRoutes from './routes/auth.routes.js'
 import bookingRoutes from './routes/booking.routes.js'
-// import approvalRoutes from './routes/approval.routes.js'
+import approvalRoutes from './routes/approval.routes.js'
 // import vehicleRoutes from './routes/vehicle.routes.js'
 
 const app = express();
@@ -19,7 +19,7 @@ app.get("/api/health", (req, res) => {
 app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/bookings', bookingRoutes)
-// app.use('/api/approvals', approvalRoutes)
+app.use('/api/bookings', approvalRoutes)
 // app.use('/api/vehicles', vehicleRoutes)
 
 const PORT = 8080;
