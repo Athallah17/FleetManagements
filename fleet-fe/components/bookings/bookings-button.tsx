@@ -12,9 +12,32 @@ import {
     DialogClose,
 } from "../ui/dialog"
 import { Input } from "../ui/input"
+import { useBooking } from "@/hooks/useBooking"
 
 export function BookingsButton() {
     const [open, setOpen] = useState(false)
+    const [form, setForm] = useState({
+        vehicleCode: "",
+        driverCode: "",
+        supervisorCode: "",
+    })
+
+    const { createBooking, loading } = useBooking()
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = async () => {
+        try {
+            await createBooking(form)
+            setOpen(false)
+            setForm({ vehicleCode: "", driverCode: "", supervisorCode: "" })
+            // optionally, you can show a toast/notification here
+        } catch (err) {
+            console.error("Failed to create booking:", err)
+        }
+    }
 
     return (
         <>
@@ -32,10 +55,24 @@ export function BookingsButton() {
 
             {/* Form fields */}
             <div className="grid gap-4 py-4">
-                <Input placeholder="Plate Number" />
-                <Input placeholder="Driver Name" />
-                <Input placeholder="Model" />
-                <Input placeholder="Supervisor"/>
+                <Input
+                    name="vehicleCode"
+                    placeholder="Vehicle Code"
+                    value={form.vehicleCode}
+                    onChange={handleChange}
+                />
+                <Input
+                    name="driverCode"
+                    placeholder="Driver Code"
+                    value={form.driverCode}
+                    onChange={handleChange}
+                />
+                <Input
+                    name="supervisorCode"
+                    placeholder="Supervisor Code"
+                    value={form.supervisorCode}
+                    onChange={handleChange}
+                />
             </div>
 
             {/* Actions */}
@@ -43,7 +80,9 @@ export function BookingsButton() {
                 <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
                 </DialogClose>
-                <Button onClick={() => alert("Booking created!")}>Save</Button>
+                <Button onClick={handleSubmit} disabled={loading}>
+                    {loading ? "Creating..." : "Submit"}
+                </Button>
             </div>
             </DialogContent>
         </Dialog>
