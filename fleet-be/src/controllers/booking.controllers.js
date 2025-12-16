@@ -40,7 +40,7 @@ export async function createBooking(req, res) {
             // snapshot fields (optional but useful)
             vehicleCode: vehicle.code,
             plateNumber: vehicle.plateNumber,
-            model: vehicle.model,
+            // model: vehicle.model,
 
             status: 'WAITING_ADMIN',
         },
@@ -106,7 +106,7 @@ export async function getBookings(req, res) {
     where,
     orderBy: { createdAt: 'desc' },
     include: {
-        vehicle: { select: { id: true, code: true, plateNumber: true } },
+        vehicle: { select: { id: true, code: true, plateNumber: true, model: true } },
         driver: { select: { id: true, code: true, name: true } },
         supervisor: { select: { id: true, code: true, name: true } },
     },

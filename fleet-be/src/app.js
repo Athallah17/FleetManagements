@@ -8,6 +8,12 @@ import vehicleRoutes from './routes/vehicle.routes.js'
 
 const app = express();
 
+// Enable CORS for your frontend
+app.use(cors({
+  origin: "http://localhost:3000", // allow your frontend origin
+  credentials: true, // if you send cookies or auth headers
+}));
+
 app.get("/", (req, res) => {
   res.send("Fleet BE running 🚀");
 });
