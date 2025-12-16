@@ -42,7 +42,7 @@ export async function createBooking(req, res) {
             plateNumber: vehicle.plateNumber,
             model: vehicle.model,
 
-            status: 'WAITING',
+            status: 'WAITING_ADMIN',
         },
         include: {
         vehicle: {
@@ -77,9 +77,14 @@ export async function createBooking(req, res) {
 
         return res.status(201).json(booking)
     } catch (err) {
-        logError('Create booking failed', err)
-        return res.status(500).json({ message: 'Failed to create booking' })
-    }
+  console.error("🔥 CREATE BOOKING ERROR:", err);
+
+  return res.status(500).json({
+    message: "Failed to create booking",
+    error: err.message,
+    code: err.code,
+  });
+}
 }
 
 
