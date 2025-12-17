@@ -9,15 +9,13 @@ export function MostUsed() {
   if (!data) return <p>Loading...</p>;
 
   // Map backend mostUsedCars to chart data
-  const chartData = data.mostUsedCars
-    .filter(car => car.model)
-    .map(car => ({
-      Type: car.model,
-      Usage: car._count.model
-    }));
+  const chartData = data.mostUsedCars.map(car => ({
+    Type: car.model || "Unknown",
+    Usage: car.count || 0, // fallback to 0
+  }));
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={400}>
       <PieChart>
         <Pie
           data={chartData}
