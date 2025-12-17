@@ -1,4 +1,4 @@
-
+'use client'
 import { CheckCircle, Clock, Truck, XCircle, TrendingUp, Calendar } from "lucide-react";
 import {
   Card,
@@ -11,10 +11,16 @@ import {Overview} from "@/components/dashboard/Overview";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { MostUsed } from "@/components/dashboard/MostUsed";
 import { AnalyticsTabs } from "@/components/dashboard/AnalyticsGraph";
-import { MaintenanceDue } from "@/components/dashboard/Maintance";
+import {MaintenanceVehicles} from "@/components/dashboard/Maintance";
 import StatsCard from "@/components/dashboard/StatsCard";
+import { useDashboard } from "@/hooks/useDashboard";
 
 export default function DashboardPage() {
+    const {data, isLoading, isError } = useDashboard();
+    
+    if(isLoading) return <p>Please Wait Dashboard Loading...</p>
+    if(isError)return <p>Something Went Wrong Comeback Later</p>
+
     return (
         <div className=" bg-gray-50 dark:bg-zinc-900 ">
             <main className="p-8 space-y-8">
@@ -29,7 +35,7 @@ export default function DashboardPage() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <StatsCard
                         title="Total Vehicles"
-                        value={75}
+                        value={data?.vehicles.totalVehicles}
                         icon={<Truck className="h-5 w-5" />}
                         description="All vehicles in fleet"
                         className="text-black"
@@ -38,7 +44,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Available Vehicles"
-                        value={50}
+                        value={data?.vehicles.availableVehicles}
                         icon={<Truck className="h-5 w-5" />}
                         description="In the fleet"
                         className="text-black"
@@ -47,7 +53,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Active Vehicles"
-                        value={10}
+                        value={data?.vehicles.inUseVehicles}
                         icon={<Truck className="h-5 w-5" />}
                         description="Currently in use"
                         className="text-black"
@@ -56,7 +62,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Returned Vehicles"
-                        value={5}
+                        value={data?.vehicles.finishedUseVehicles}
                         icon={<Truck className="h-5 w-5" />}
                         description="Back in fleet"
                         className="text-black"
@@ -67,7 +73,7 @@ export default function DashboardPage() {
                     {/* Approval Cards */}
                     <StatsCard
                         title="Total Bookings"
-                        value={128}
+                        value={data?.bookings.totalBookings}
                         icon={<Calendar className="h-5 w-5" />}
                         description="This month"
                         className="text-black"
@@ -76,7 +82,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Pending Approval"
-                        value={14}
+                        value={data?.bookings.pendingApproval}
                         icon={<Clock className="h-5 w-5" />}
                         description="Awaiting review"
                         className="text-black"
@@ -85,7 +91,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Approved"
-                        value={96}
+                        value={data?.bookings.approvedBookings}
                         icon={<CheckCircle className="h-5 w-5" />}
                         description="Successfully approved"
                         className="text-black"
@@ -94,7 +100,7 @@ export default function DashboardPage() {
                     />
                     <StatsCard
                         title="Rejected"
-                        value={18}
+                        value={data?.bookings.rejectedBookings}
                         icon={<XCircle className="h-5 w-5" />}
                         description="Bookings denied"
                         className="text-black"
@@ -162,7 +168,7 @@ export default function DashboardPage() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <MaintenanceDue/>
+                                <MaintenanceVehicles/>
                             </CardContent>
                         </Card>
                     </div>
