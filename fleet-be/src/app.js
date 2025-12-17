@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes.js'
 import bookingRoutes from './routes/booking.routes.js'
 import approvalRoutes from './routes/approval.routes.js'
 import vehicleRoutes from './routes/vehicle.routes.js'
+import dashboardRoutes from './routes/dashboard.routes.js'
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/bookings', bookingRoutes)
 app.use('/api/bookings', approvalRoutes)
 app.use('/api/vehicles', vehicleRoutes)
+app.use('/api/dashboard', dashboardRoutes)
 
 const PORT = 8080;
 app.listen(PORT, () => {
