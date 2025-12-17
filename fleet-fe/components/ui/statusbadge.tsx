@@ -9,6 +9,9 @@ export function StatusBadge({ status }: { status: string }) {
     WAITING_SPV: "bg-yellow-200 text-yellow-800",
     ACCEPTED_SPV: "bg-green-200 text-green-800",
     REJECTED_SPV: "bg-red-200 text-red-800",
+    ACTIVE: "bg-green-100 text-green-700",
+    IN_SERVICE: "bg-yellow-200 text-yellow-800",
+    RETIRED: "bg-red-100 text-red-700",
   }
 
 return (

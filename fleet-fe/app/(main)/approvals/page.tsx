@@ -17,8 +17,8 @@ export default function ApprovalPage() {
   return (
     <div className="min-h-screen p-6 bg-gray-50">
       <div>
-        {/* <p>Welcome, {user.name} </p>
-        <p>Welcome, {user.role} </p> */}
+         {/* <p>Welcome, {user.name} </p> */}
+        <p>Welcome, {user.role} </p>
         <h1 className="text-2xl font-bold tracking-tight">Approval Pages</h1>
         <p className="text-muted-foreground">
           List of pending approvals that need to be reviewed

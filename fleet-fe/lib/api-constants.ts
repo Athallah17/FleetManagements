@@ -21,11 +21,11 @@ export const API = {
         SPV : (id: string) => `/bookings/${id}/spv-approval`,
     },
     ASSETS : {
-        GET : "/vehicle",
-        DETAILED : (id: string) => `/vehicle/${id}`,
-        CREATE : "/vehicle",
-        UPDATE : (id: string) => `/vehicle/${id}`,
-        DELETE : (id: string) => `/vehicle/${id}`,
+        GET : "/vehicles",
+        DETAILED : (id: string) => `/vehicles/${id}`,
+        CREATE : "/vehicles",
+        UPDATE : (id: string) => `/vehicles/${id}`,
+        DELETE : (id: string) => `/vehicles/${id}`,
         STATS : "/stats/data",
     }
 }
