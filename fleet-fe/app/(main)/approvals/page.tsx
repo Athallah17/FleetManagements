@@ -32,7 +32,7 @@ export default function ApprovalPage() {
         </div>
       </div>
 
-      <Separator className='mt-4 mb-4'/>
+      <Separator className='mt-4 mb-4 shadow-md shadow-gray-200'/>
 
       {/* Approval Cards */}
       {isLoading && <p>Loading...</p>}
@@ -40,7 +40,7 @@ export default function ApprovalPage() {
       {bookings && bookings.length === 0 && <p>No pending approvals</p>}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {bookings?.map((booking) => (
-          <Card key={booking.id}>
+          <Card className="shadow-lg shadow-gray-400"key={booking.id}>
             <CardContent>
               <ApprovalCard booking={booking} role={user.role} />
             </CardContent>

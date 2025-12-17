@@ -1,4 +1,5 @@
-import { FiCheckCircle, FiClock, FiTruck, FiXCircle } from "react-icons/fi";
+
+import { CheckCircle, Clock, Truck, XCircle, TrendingUp, Calendar } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -29,52 +30,76 @@ export default function DashboardPage() {
                     <StatsCard
                         title="Total Vehicles"
                         value={75}
-                        icon={<FiTruck className="h-5 w-5" />}
+                        icon={<Truck className="h-5 w-5" />}
                         description="All vehicles in fleet"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Available Vehicles"
                         value={50}
-                        icon={<FiTruck className="h-5 w-5" />}
+                        icon={<Truck className="h-5 w-5" />}
                         description="In the fleet"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-00"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Active Vehicles"
                         value={10}
-                        icon={<FiTruck className="h-5 w-5" />}
+                        icon={<Truck className="h-5 w-5" />}
                         description="Currently in use"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Returned Vehicles"
                         value={5}
-                        icon={<FiTruck className="h-5 w-5" />}
+                        icon={<Truck className="h-5 w-5" />}
                         description="Back in fleet"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
 
                     {/* Approval Cards */}
                     <StatsCard
                         title="Total Bookings"
                         value={128}
-                        icon={<FiTruck className="h-5 w-5" />}
+                        icon={<Calendar className="h-5 w-5" />}
                         description="This month"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Pending Approval"
                         value={14}
-                        icon={<FiClock className="h-5 w-5" />}
+                        icon={<Clock className="h-5 w-5" />}
                         description="Awaiting review"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Approved"
                         value={96}
-                        icon={<FiCheckCircle className="h-5 w-5" />}
+                        icon={<CheckCircle className="h-5 w-5" />}
                         description="Successfully approved"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Rejected"
                         value={18}
-                        icon={<FiXCircle className="h-5 w-5" />}
+                        icon={<XCircle className="h-5 w-5" />}
                         description="Bookings denied"
+                        className="text-black"
+                        gradient="bg-gradient-to-br from-white to-gray-100"
+                        iconBg="bg-white backdrop-blur-sm"
                     />
                 </div>
 

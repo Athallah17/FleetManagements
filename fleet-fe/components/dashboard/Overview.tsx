@@ -1,5 +1,5 @@
 "use client"
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Cell, Tooltip } from 'recharts'
 
 const data = [
     { month: "Jan", total: 20 },
@@ -16,6 +16,11 @@ const data = [
     { month: "Dec", total: 33 },
 ];
 
+const getColor = (value)=> {
+    if (value < 20 ) return '#f56565';
+    if (value > 20) return '#48bb78';
+    return '#ecc94b';
+}
 export function Overview () {
     return (
         <ResponsiveContainer width='100%' height={350}>
@@ -25,22 +30,22 @@ export function Overview () {
                     stroke='#888888'
                     fontSize={12}
                     tickLine={false}
-                    axisLine={false}
+                    axisLine={true}
                 />
                 <YAxis
                 direction='ltr'
                 stroke='#888888'
                 fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `$${value}`}
+                tickLine={true}
+                axisLine={true}
+                tickFormatter={(value) => `${value}`}
                 />
-                <Bar
-                dataKey={'total'}
-                fill={'#4c51bf'}
-                radius={[4, 4, 0, 0]}
-                className='fill-primary'
-                />
+                <Bar dataKey='total' radius={[4, 4, 0, 0]}>
+                        {data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={getColor(entry.total)} />
+                        ))}
+                </Bar>
+                <Tooltip/>
             </BarChart>
         </ResponsiveContainer>
     )
