@@ -47,6 +47,8 @@ export async function login(req, res) {
         name: user.name,
         role: user.role,
         office: user.office,
+        email: user.email,
+        createdAt: user.createdAt,
       },
     })
   } catch (error) {

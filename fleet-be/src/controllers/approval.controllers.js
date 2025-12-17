@@ -1,6 +1,47 @@
 import prisma from '../config/db.js'
 import { log } from '../utils/logger.js'
 
+// NEW: GET pending approvals
+export async function getPendingApprovals(req, res) {
+  try {
+    const bookings = await prisma.booking.findMany({
+      where: {
+        OR: [
+          { status: 'WAITING_ADMIN' },   // waiting admin approval
+          { status: 'APPROVED_ADMIN' }   // waiting supervisor approval
+        ],
+      },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        vehicle: {
+            select: { 
+            code: true,
+            plateNumber: true,
+            model: true,
+            },
+        },
+        driver: {
+            select: {
+            code: true,
+            name: true,
+            },
+        },
+        supervisor: {
+            select: {
+            code: true,
+            name: true,
+            },
+        },
+        }
+    });
+
+    res.json(bookings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch pending bookings' });
+  }
+}
+
 // LEVEL 1: Admin approval
 export async function adminApproval(req, res) {
   try {
