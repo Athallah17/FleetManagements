@@ -4,6 +4,7 @@ export const API = {
         HEALTH: "/health",
     },
     DASHBOARD : {
+        DATA: "/dashboard/",
         STATS : "/dashboard/stats",
         VEHICLE: "/dashboard/vehicle",
         ACTIVITY: "/dashboard/activity",
