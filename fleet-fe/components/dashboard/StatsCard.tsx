@@ -24,7 +24,7 @@ export default function StatsCard({
   return (
     <Card
       className={cn(
-        "p-4 relative flex flex-col justify-center items-center shadow-sm hover:shadow-md",
+        "p-4 relative flex flex-col justify-center items-center shadow-sm hover:shadow-xl border-blue-950/80",
         gradient,
         className
       )}

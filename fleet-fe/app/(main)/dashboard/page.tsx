@@ -14,6 +14,7 @@ import { AnalyticsTabs } from "@/components/dashboard/AnalyticsGraph";
 import {MaintenanceVehicles} from "@/components/dashboard/Maintance";
 import StatsCard from "@/components/dashboard/StatsCard";
 import { useDashboard } from "@/hooks/useDashboard";
+import { Separator } from "@/components/ui/separator";
 
 export default function DashboardPage() {
     const {data, isLoading, isError } = useDashboard();
@@ -22,15 +23,16 @@ export default function DashboardPage() {
     if(isError)return <p>Something Went Wrong Comeback Later</p>
 
     return (
-        <div className=" bg-gray-50 dark:bg-zinc-900 ">
+        <div className="  dark:bg-zinc-900 ">
             <main className="p-8 space-y-8">
-                <div>
+                <div className="space-y-2">
                     <h1 className="text-3xl font-bold tracking-tight">
                     Dashboard
                     </h1>
+                    <p className="text-sm">Track All Information About Company Fleet</p>
                     {/* CTA Button */}
+                    <Separator/>
                 </div>
-
                 {/* Top Cards */}
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <StatsCard
@@ -40,7 +42,7 @@ export default function DashboardPage() {
                         description="All vehicles in fleet"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Available Vehicles"
@@ -49,7 +51,7 @@ export default function DashboardPage() {
                         description="In the fleet"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-00"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Active Vehicles"
@@ -58,7 +60,7 @@ export default function DashboardPage() {
                         description="Currently in use"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Returned Vehicles"
@@ -67,7 +69,7 @@ export default function DashboardPage() {
                         description="Back in fleet"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
 
                     {/* Approval Cards */}
@@ -78,7 +80,7 @@ export default function DashboardPage() {
                         description="This month"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Pending Approval"
@@ -87,7 +89,7 @@ export default function DashboardPage() {
                         description="Awaiting review"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Approved"
@@ -96,7 +98,7 @@ export default function DashboardPage() {
                         description="Successfully approved"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                     <StatsCard
                         title="Rejected"
@@ -105,13 +107,13 @@ export default function DashboardPage() {
                         description="Bookings denied"
                         className="text-black"
                         gradient="bg-gradient-to-br from-white to-gray-100"
-                        iconBg="bg-white backdrop-blur-sm"
+                        iconBg="bg-blue backdrop-blur-sm"
                     />
                 </div>
 
                 {/* Overview */}
                 <div className='grid grid-cols-1 gap-4 lg:grid-cols-3'>
-                    <Card className="col-span-1 lg:col-span-2 ">
+                    <Card className="hover:shadow-2xl col-span-1 lg:col-span-2 border-blue-950/80 ">
                         <CardHeader>
                             <CardTitle className="px-4 pt-4">Vehicle Usage</CardTitle>
                             <CardDescription className="px-4 pb-2">
@@ -124,7 +126,7 @@ export default function DashboardPage() {
                     </Card>
 
                     {/* Most Used Vehicles */}
-                    <Card className="col-span-1 lg:col-span-1 ">
+                    <Card className="hover:shadow-2xl col-span-1 lg:col-span-1 border-blue-950/80 ">
                         <CardHeader>
                             <CardTitle> Most Used Cars </CardTitle>
                             <CardDescription>
@@ -139,7 +141,7 @@ export default function DashboardPage() {
 
                 <div className="grid grid-cols-2 gap-4 ">
                     {/* Analytics Graph*/}
-                    <Card className="col-span-1 lg:col-span-1">
+                    <Card className="hover:shadow-2xl col-span-1 lg:col-span-1  border-blue-950/80">
                         <CardHeader>
                             <CardTitle> Analytics </CardTitle>
                         </CardHeader>
@@ -149,7 +151,7 @@ export default function DashboardPage() {
                     </Card>
                     <div className="grid grid-rows-1 gap-2 ">
                         {/* Recent Activity */}
-                        <Card className='col-span-1 lg:col-span-1'>
+                        <Card className='hover:shadow-2xl col-span-1 lg:col-span-1  border-blue-950/80'>
                             <CardHeader>
                                 <CardTitle>Recent Activity</CardTitle>
                                 <CardDescription>
@@ -160,7 +162,7 @@ export default function DashboardPage() {
                                 <RecentActivity />
                             </CardContent>
                         </Card>
-                        <Card className='col-span-1 lg:col-span-1'>
+                        <Card className='hover:shadow-2xl col-span-1 lg:col-span-1  border-blue-950/80'>
                             <CardHeader>
                                 <CardTitle>Maintaince</CardTitle>
                                 <CardDescription>

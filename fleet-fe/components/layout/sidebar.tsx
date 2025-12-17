@@ -21,18 +21,18 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "relative h-screen border-r bg-gray-100 transition-all duration-300 text-black",
+        "relative h-screen transition-all duration-300 text-black bg-linear-to-b from-blue-200 to-gray-300 border-r-6 border-r-blue-950",
         collapsed ? "w-16" : "w-64"
       )}
     >
       {/* Toggle */}
       <button
         onClick={toggle}
-        className="absolute -right-3 top-6 z-10 rounded-full border bg-background p-1"
+        className="absolute -right-3 top-6 z-10 rounded-full border-4 border-blue-950 bg-background p-1"
       >
         <FiChevronLeft
           className={cn(
-            "h-8 w-8 transition-transform",
+            "h-8 w-8 transition-transform ",
             collapsed && "rotate-180"
           )}
         />
@@ -51,7 +51,7 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center rounded-md px-3 py-2 transition-colors hover:bg-muted",
+                "flex items-center rounded-md px-3 py-2 transition-colors hover:bg-gray-400",
                 collapsed ? "justify-center" : "gap-3"
               )}
             >

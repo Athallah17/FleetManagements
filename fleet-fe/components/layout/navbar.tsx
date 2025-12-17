@@ -22,7 +22,7 @@ export function Navbar() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 return (
     <>
-    <header className="w-full border-b bg-gray-100 px-8 py-4">
+    <header className="w-full bg-gradient-to-r  from-blue-200 to-gray-300  px-8 py-4  border-b-blue-950 border-b-4">
         <div className="flex h-16 items-center justify-between">
             <h1 className="text-xl font-semibold text-gray-800">
                 
@@ -31,9 +31,9 @@ return (
             <div className="flex items-center gap-4">
                 <button
                 onClick={() => setIsDialogOpen(true)}
-                className="flex items-center gap-3 bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 px-4 py-2 rounded-xl border border-indigo-100 transition-all hover:shadow-md group"
+                className="flex items-center gap-3 bg-gradient-to-r from-white to-white hover:from-indigo-100 hover:to-purple-100 px-4 py-2 rounded-xl border border-indigo-100 transition-all hover:shadow-md group"
                 >
-                <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-semibold text-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-200 to-blue-600 rounded-lg flex items-center justify-center text-white font-semibold text-sm group-hover:scale-110 transition-transform">
                     {user?.name?.charAt(0) || "G"}
                 </div>
                 <div className="text-left">
@@ -61,7 +61,7 @@ return (
             {/* Dialog */}
             <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md animate-scale-in overflow-hidden">
                 {/* Header with gradient */}
-                <div className="relative bg-gradient-to-br from-indigo-500 to-purple-600 px-6 py-8">
+                <div className="relative bg-gradient-to-br from-blue-200 to-blue-600 px-6 py-8">
                 <button
                     onClick={() => setIsDialogOpen(false)}
                     className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"

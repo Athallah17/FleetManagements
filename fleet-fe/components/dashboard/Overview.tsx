@@ -13,22 +13,24 @@ export function Overview() {
 
   const getColor = (value: number) => {
     if (value < 20) return "#f56565"; // red
-    if (value > 20) return "#48bb78"; // green
+    if (value > 20) return "#10b981"; // green
     return "#ecc94b"; // yellow
   };
 
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={chartData}>
-        <XAxis dataKey="month" stroke="#888888" fontSize={12} tickLine={false} />
-        <YAxis stroke="#888888" fontSize={12} tickLine />
-        <Bar dataKey="total" radius={[4, 4, 0, 0]}>
-          {chartData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={getColor(entry.total)} />
-          ))}
-        </Bar>
-        <Tooltip />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="">
+      <ResponsiveContainer width="100%" height={350}>
+        <BarChart data={chartData}>
+          <XAxis dataKey="month" stroke="#888888" fontSize={12} tickLine={false} />
+          <YAxis stroke="#888888" fontSize={12} tickLine />
+          <Bar dataKey="total" radius={[4, 4, 0, 0]}>
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={getColor(entry.total)} />
+            ))}
+          </Bar>
+          <Tooltip />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ export function RecentActivity() {
   const activities = data.recentActivities;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {activities.map(activity => (
         <div key={activity.id} className="flex items-center gap-4">
           <Avatar className="h-8 w-8">
