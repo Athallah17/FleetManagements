@@ -21,7 +21,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "relative h-screen border-r bg-background transition-all duration-300",
+        "relative h-screen border-r bg-gray-100 transition-all duration-300 text-black",
         collapsed ? "w-16" : "w-64"
       )}
     >
@@ -40,8 +40,9 @@ export function Sidebar() {
 
       <div className="p-4 mt-32">
         {!collapsed && (
-          <h2 className="mb-6 text-lg font-semibold">
-          </h2>
+          <h1 className="mb-6 text-lg font-semibold">
+            FLEET MANAGEMENTS
+          </h1>
         )}
 
         <nav className="space-y-2">
@@ -57,7 +58,7 @@ export function Sidebar() {
               <item.icon
                   className={cn(
                     "shrink-0 transition-all",
-                    collapsed ? "h-6 w-6" : "h-5 w-5"
+                    collapsed ? "h-12 w-" : "h-5 w-5"
                   )}
                 />
                 {!collapsed && (

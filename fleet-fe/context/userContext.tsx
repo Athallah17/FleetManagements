@@ -9,7 +9,9 @@ export interface User {
   name: string;
   role: 'admin' | 'supervisor' | 'driver';
   office: string;
+  email: string;
   token: string;
+  createdAt: Date;
 }
 
 interface UserContextType {
@@ -27,6 +29,8 @@ interface JWTPayload {
   id: string;
   name?: string;
   role: string;
+  email: string;
+  createdAt: Date;
   office?: string;
   exp: number;
 }
@@ -42,8 +46,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       setUser({
         id: payload.id,
         name: payload.name || "",
+        email: payload.email || "",
         role: payload.role as User['role'],
         office: payload.office || "",
+        createdAt: payload.createdAt,
         token,
       });
 

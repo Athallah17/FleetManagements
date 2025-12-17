@@ -28,7 +28,9 @@ export function useAuth() {
         name: data.user.name,
         role: data.user.role,
         office: data.user.office,
+        email: data.user.email,
         token: data.token,
+        createdAt: data.createdAt,
       });
 
       router.push("/dashboard"); // redirect after login
