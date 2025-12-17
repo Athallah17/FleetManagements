@@ -7,14 +7,28 @@ export async function getDashboardData(req, res) {
   try {
     // --- VEHICLE STATS ---
     const totalVehicles = await prisma.vehicle.count();
+
+    // Available: ACTIVE and not currently booked
+    const bookedVehicleIds = await prisma.booking.findMany({
+      where: {
+        status: { in: [BookingStatus.APPROVED, BookingStatus.APPROVED_ADMIN, BookingStatus.APPROVED_SPV] },
+      },
+      select: { vehicleId: true },
+    }).then((b) => b.map((x) => x.vehicleId));
+
     const availableVehicles = await prisma.vehicle.count({
-      where: { status: VehicleStatus.ACTIVE },
+      where: {
+        status: VehicleStatus.ACTIVE,
+        id: { notIn: bookedVehicleIds },
+      },
     });
+
     const inUseVehicles = await prisma.booking.count({
-      where: { status: BookingStatus.APPROVED },
+      where: { status: { in: [BookingStatus.APPROVED, BookingStatus.APPROVED_ADMIN, BookingStatus.APPROVED_SPV] } },
     });
+
     const finishedUseVehicles = await prisma.booking.count({
-      where: { status: BookingStatus.REJECTED }, // adjust if you have a "finished" status
+      where: { status: { in: [BookingStatus.REJECTED, BookingStatus.REJECTED_ADMIN, BookingStatus.REJECTED_SPV] } },
     });
 
     // --- BOOKING STATS ---
@@ -23,22 +37,10 @@ export async function getDashboardData(req, res) {
       where: { status: BookingStatus.WAITING_ADMIN },
     });
     const approvedBookings = await prisma.booking.count({
-      where: {
-        OR: [
-          { status: BookingStatus.APPROVED_ADMIN },
-          { status: BookingStatus.APPROVED_SPV },
-          { status: BookingStatus.APPROVED },
-        ],
-      },
+      where: { status: { in: [BookingStatus.APPROVED, BookingStatus.APPROVED_ADMIN, BookingStatus.APPROVED_SPV] } },
     });
     const rejectedBookings = await prisma.booking.count({
-      where: {
-        OR: [
-          { status: BookingStatus.REJECTED_ADMIN },
-          { status: BookingStatus.REJECTED_SPV },
-          { status: BookingStatus.REJECTED },
-        ],
-      },
+      where: { status: { in: [BookingStatus.REJECTED, BookingStatus.REJECTED_ADMIN, BookingStatus.REJECTED_SPV] } },
     });
 
     // --- MONTHLY VEHICLE USAGE (past 30 days) ---
@@ -49,41 +51,48 @@ export async function getDashboardData(req, res) {
     });
 
     // --- MOST USED CAR MODELS ---
-    const mostUsedCars = await prisma.booking.groupBy({
+    const mostUsedCarsRaw = await prisma.booking.groupBy({
       by: ["model"],
       _count: { model: true },
       orderBy: { _count: { model: "desc" } },
       take: 5,
     });
 
-    // --- RECENT ACTIVITIES ---
-    const recentActivities = await prisma.booking.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 10,
-      select: {
-        id: true,
-        model: true,
-        plateNumber: true,
-        status: true,
-        createdAt: true,
-        driver: { select: { name: true } },
-        supervisor: { select: { name: true } },
-        admin: { select: { name: true } },
-      },
-    });
+    const mostUsedCars = mostUsedCarsRaw
+      .filter((m) => m.model) // remove nulls
+      .map((m) => ({ model: m.model, count: m._count.model }));
 
-    // --- VEHICLE MAINTENANCE ---
-    const maintenanceVehicles = await prisma.vehicle.findMany({
-      where: {
-        status: VehicleStatus.IN_SERVICE,
-      },
-      select: {
-        id: true,
-        plateNumber: true,
-        model: true,
-        lastService: true,
-      },
-    });
+// --- RECENT ACTIVITIES (latest 10) ---
+const recentActivities = await prisma.booking.findMany({
+  orderBy: { createdAt: "desc" },
+  take: 5, // latest 10
+  select: {
+    id: true,
+    model: true,
+    plateNumber: true,
+    status: true,
+    createdAt: true,
+    driver: { select: { name: true } },
+    supervisor: { select: { name: true } },
+    admin: { select: { name: true } },
+  },
+});
+
+// --- VEHICLE MAINTENANCE (top 5) ---
+const maintenanceVehicles = await prisma.vehicle.findMany({
+  where: {
+    status: VehicleStatus.IN_SERVICE,
+  },
+  orderBy: { lastService: "asc" }, // oldest serviced vehicles first
+  take: 5, // top 5
+  select: {
+    id: true,
+    plateNumber: true,
+    model: true,
+    lastService: true,
+    status: true,
+  },
+});
 
     return res.json({
       vehicles: { totalVehicles, availableVehicles, inUseVehicles, finishedUseVehicles },
