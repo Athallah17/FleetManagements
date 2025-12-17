@@ -16,6 +16,7 @@ export const API = {
         DELETE : (id: string) => `/bookings/${id}`,
     },
     APPROVAL : {
+        PENDING : "/bookings/approval/pending",
         ADMIN : (id: string) => `/bookings/${id}/admin-approval`,
         SPV : (id: string) => `/bookings/${id}/spv-approval`,
     },

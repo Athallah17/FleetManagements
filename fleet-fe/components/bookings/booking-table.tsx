@@ -19,39 +19,6 @@ import {
 import {columns} from "./bookings-columns"
 import { useBooking } from '@/hooks/useBooking';
 
-const data = [
-    {
-        plate : "B 1234 ABC",
-        driver : " John Doe",
-        date: "22/12/2025",
-        contact: "08123444444",
-        status : "Accepted",
-        supervisor : "Ilham",
-        Spvcontact: "08123131321",
-        model : "Toyota Innova",
-    },
-    {
-        plate : "B 1223 ABS",
-        driver : " John Saa",
-        date: "21/12/2025",
-        contact: "08123434242",
-        status : "Waiting",
-        supervisor : "Budi",
-        Spvcontact: "08123131321",
-        model : "Toyota Fortuner",
-    },
-    {
-        plate : "B 1123 XXX",
-        driver : " Micel Adas",
-        date: "18/11/2025",
-        contact: "0811111111",
-        status : "Rejected",
-        supervisor : "Asep",
-        Spvcontact: "08123131321",
-        model : "Hino Truck",
-    },
-]
-
 export function BookingsTable () {
     const {bookings, loading, error} = useBooking();
     const [sorting, setSorting] = React.useState<SortingState>([])

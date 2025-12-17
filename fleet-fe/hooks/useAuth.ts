@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { authService } from "@/services/auth-services";
 import { useRouter } from "next/navigation";
+import { authService } from "@/services/auth-services";
+import { useUser } from "@/context/userContext"; //
 
 type AuthForm = {
   email: string;
@@ -13,12 +14,23 @@ export function useAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { setUser } = useUser(); // get setUser from context
 
   const handleAuth = async (form: AuthForm) => {
     setLoading(true);
     setError(null);
     try {
-      await authService.login(form.email, form.password);
+      const data = await authService.login(form.email, form.password);
+
+      // Update context with logged-in user
+      setUser({
+        id: data.user.id,
+        name: data.user.name,
+        role: data.user.role,
+        office: data.user.office,
+        token: data.token,
+      });
+
       router.push("/dashboard"); // redirect after login
     } catch (err: any) {
       setError(err.message || "Login failed");

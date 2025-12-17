@@ -6,12 +6,13 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export function getInitials(name: string) {
+export function getInitials(name?: string) {
+  if (!name) return "?"; // fallback jika undefined atau null
   return name
     .trim()
     .split(" ")
     .map((word) => word[0])
-    .slice(0, 2) // max 2 letters
+    .slice(0, 2)
     .join("")
-    .toUpperCase()
+    .toUpperCase();
 }
