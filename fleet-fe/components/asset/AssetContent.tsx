@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect } from "react";
 import {
   Table,
@@ -23,16 +22,15 @@ import {
 } from "@/components/ui/pagination";
 
 export function AssetContent() {
-  const { vehicles = [], loading, error, page, total, limit, setPage, fetchVehicles } = useAssets();
+  const { vehicles, loading, error, page, total, limit, setPage, fetchVehicles } = useAssets();
 
   useEffect(() => {
-    fetchVehicles();
-  }, [page]);
+    fetchVehicles(); // make sure this updates the state in your hook
+  }, [page, fetchVehicles]); // add fetchVehicles to deps to prevent stale closure
 
   if (loading) return <p className="text-center py-6">Loading vehicles...</p>;
   if (error) return <p className="text-center py-6 text-red-500">{error}</p>;
-  if (!vehicles.length) return <p className="text-center py-6">No vehicles found.</p>;
-
+  if (!vehicles || vehicles.length === 0) return <p className="text-center py-6">No vehicles found.</p>;
 
   const totalPages = Math.ceil(total / limit);
 
@@ -91,7 +89,6 @@ export function AssetContent() {
         </TableBody>
       </Table>
 
-      {/* ShadCN Pagination */}
       <div className="flex justify-center mt-4">
         <Pagination>
           <PaginationContent>
