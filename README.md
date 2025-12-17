@@ -24,8 +24,8 @@ Features include:
 
 | Role                  | Username               | Password      |
 |-----------------------|------------------------|---------------|
-| Admin                 | admin@mail.com         | password123   |
-| Approver Level 1      | suppervisor1@mail.com  | password123   |
+| Admin (Level 1)       | admin@mail.com         | password123   |
+| Approver Level 2      | suppervisor1@mail.com  | password123   |
 | Approver Level 2      | suppervisor2@mail.com  | password123   |
 
 ---
